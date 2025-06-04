@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PointClickCare</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        header {
-            font-size: 32px;
-            font-weight: 900;
-            color: #4a4a4a;
-            background-color: white;
-            padding: 20px;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .button {
-            padding: 15px 40px;
-            font-size: 18px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease-in-out;
-            width: 250px;
-            text-align: center;
-        }
-        .button:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
-            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Launch Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .input-group {
+      margin: 10px;
+    }
+    select, input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
-    <header>PointClickCare</header>
-    <div class="button-container">
-        <button class="button" onclick="location.href='analysis1.html'">Analysis 1</button>
-        <button class="button" onclick="location.href='analysis2.html'">Analysis 2</button>
-        <button class="button" onclick="location.href='analysis3.html'">Analysis 3</button>
-    </div>
+  <h1>PointClickCare</h1>
+
+  <div class="input-group">
+    <label for="env">Environment: </label>
+    <select id="env">
+      <option value="test-app.clootrack.com">Stage</option>
+      <option value="app.clootrack.com">Prod</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label for="redirect">Redirect URL: </label>
+    <input type="text" id="redirect" placeholder="e.g., view/6294"/>
+  </div>
+
+  <button onclick="openAnalysis()">Open Analysis</button>
+
+  <script>
+    function openAnalysis() {
+      const env = document.getElementById("env").value;
+      const redirect = document.getElementById("redirect").value.trim();
+
+      if (!redirect) {
+        alert("Please enter a redirect URL.");
+        return;
+      }
+
+      const encodedRedirect = encodeURIComponent(`/${redirect}`);
+      const url = `https://${env}/web/sso/auto_authenticate/?domain_sso=clootrack.com&redirect_url=/${encodedRedirect}`;
+      window.location.href = `analysis.html?iframeUrl=${encodeURIComponent(url)}`;
+    }
+  </script>
 </body>
 </html>
