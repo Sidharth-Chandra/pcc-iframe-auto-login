@@ -6,52 +6,90 @@
   <title>Launch Analysis</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background-color: #f4f4f4;
+      background-color: #f9fafb;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      flex-direction: column;
     }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
     .input-group {
-      margin: 10px;
+      margin-bottom: 20px;
+      text-align: left;
     }
-    select, input, button {
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    select, input {
+      width: 100%;
       padding: 10px;
       font-size: 16px;
-      margin: 5px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
     }
+
     button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
       background-color: #28a745;
       color: white;
+      font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.2s ease;
     }
+
     button:hover {
       background-color: #218838;
     }
   </style>
 </head>
 <body>
-  <h1>Iframe Test</h1>
+  <div class="container">
+    <h1>Launch Analysis</h1>
 
-  <div class="input-group">
-    <label for="env">Environment: </label>
-    <select id="env">
-      <option value="test-app.clootrack.com">Stage</option>
-      <option value="app.clootrack.com">Prod</option>
-    </select>
+    <div class="input-group">
+      <label for="env">Environment</label>
+      <select id="env">
+        <option value="test-app.clootrack.com">Stage</option>
+        <option value="app.clootrack.com">Prod</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="redirect">Redirect Path</label>
+      <input type="text" id="redirect" placeholder="e.g. view/6294" />
+    </div>
+
+    <button onclick="openAnalysis()">Open Analysis</button>
   </div>
-
-  <div class="input-group">
-    <label for="redirect">Redirect URL: </label>
-    <input type="text" id="redirect" placeholder="view/6294"/>
-  </div>
-
-  <button onclick="openAnalysis()">Open Analysis</button>
 
   <script>
     function openAnalysis() {
