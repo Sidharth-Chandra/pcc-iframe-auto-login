@@ -64,7 +64,7 @@
       }
 
       const encodedRedirect = encodeURIComponent(`/${redirect}`);
-      const url = `https://${env}/web/sso/auto_authenticate/?domain_sso=clootrack.com&redirect_url=/${encodedRedirect}`;
+      const url = `https://${env}/web/sso/auto_authenticate/?domain_sso=clootrack.com&redirect_url=${encodedRedirect}`;
       window.location.href = `analysis.html?iframeUrl=${encodeURIComponent(url)}`;
     }
   </script>
